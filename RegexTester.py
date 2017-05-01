@@ -4,7 +4,7 @@
 #
 
 __author__ = "Black Viking"
-__date     = "01.05.2017"
+__date__   = "01.05.2017"
 
 from Tkinter import *
 import re
