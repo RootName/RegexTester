@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
-#
-#
 
 __author__ = "Black Viking"
 __date__   = "01.05.2017"
@@ -9,49 +7,51 @@ __date__   = "01.05.2017"
 from Tkinter import *
 import re
 
-def test(string, reString):
+class Program:
+    def __init__(self):
+        self.root = Tk()
+        self.root.title("Black Viking | Regex Tester")
+        self.root.tk_setPalette("black")
 
-	reString = re.compile(reString)
-	result   = re.findall(reString, string)
+        self.bilgiBanner=Label(text="Regular Expression Tester",bg="green",fg="black")
+        self.bilgiBanner.pack(side=TOP,fill=X)
+        
+        self.labelStr = Label(text="Yazı", fg="green")
+        self.labelRe  = Label(text="Regex", fg="green")
+        self.labelRes = Label(text="Sonuç", fg="green")
 
-	textRes.delete('1.0', END)
+        self.entryStr = Entry()
+        self.entryRe  = Entry()
+        self.entryRe.bind("<Key>",self.test) # herhangi bir tuşa basılırsa, test metodu çalışsın
 
-	for res in result:
-		textRes.insert(END, res+"\n")
+        self.textRes = Text(fg="green")
 
-	textRes.insert(END, "-"*40+"\n")
+##        self.button = Button(text="Test", fg="green", command = lambda: test(entryStr.get(), entryRe.get()))
+##        self.button.pack()
+        
+        self.labelStr.pack()
+        self.entryStr.pack()
+        self.labelRe.pack()
+        self.entryRe.pack()
+        self.labelRes.pack()
+        self.textRes.pack()
 
+        
+        self.root.mainloop()
 
-def main():
-	global textRes, entryStr, entryRe
+    def test(self,event=None):
+        try:
+            reString=self.entryRe.get()
+            string=self.entryStr.get()
+            reString = re.compile(reString)
+            result   = re.findall(reString, string)
+            self.textRes.delete('1.0', END)
+            for res in result:
+                self.textRes.insert(END,res+"\n")
+            self.textRes.insert(END,("\n"+(40*"_")))
+        except Exception,e:
+            #print(e)
+            pass
+        
 
-	root = Tk()
-	root.title("Black Viking | Regex Tester")
-	root.tk_setPalette("black")
-
-	labelStr = Label(text="String :", fg="green")
-	labelRe  = Label(text="Regex  :", fg="green")
-	labelRes = Label(text="Result :", fg="green")
-
-	entryStr = Entry()
-	entryRe  = Entry()
-
-	textRes = Text(fg="green")
-
-	button = Button(text="Test", fg="green", command = lambda: test(entryStr.get(), entryRe.get()))
-
-	labelStr.pack()
-	entryStr.pack()
-
-	labelRe.pack()
-	entryRe.pack()
-
-	labelRes.pack()
-	textRes.pack()
-
-	button.pack()
-
-	root.mainloop()
-
-if __name__ == "__main__":
-	main()
+Program()
