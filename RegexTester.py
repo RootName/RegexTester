@@ -25,8 +25,8 @@ def test(string, reString):
 def main():
 	global textRes, entryStr, entryRe
 
-	root       = Tk()
-	root.title = "Black Viking | Regex Tester"
+	root = Tk()
+	root.title("Black Viking | Regex Tester")
 	root.tk_setPalette("black")
 
 	labelStr = Label(text="String :", fg="green")
@@ -36,9 +36,9 @@ def main():
 	entryStr = Entry()
 	entryRe  = Entry()
 
-	textRes  = Text(fg="green")
+	textRes = Text(fg="green")
 
-	button   = Button(text="Test", fg="green", command = lambda: test(entryStr.get(), entryRe.get()))
+	button = Button(text="Test", fg="green", command = lambda: test(entryStr.get(), entryRe.get()))
 
 	labelStr.pack()
 	entryStr.pack()
